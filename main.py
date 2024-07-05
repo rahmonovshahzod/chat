@@ -1,4 +1,3 @@
-from dotenv import load_dotenv
 import google.generativeai as genai
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
