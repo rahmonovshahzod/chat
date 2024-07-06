@@ -32,15 +32,15 @@ def get_response(image_path):
 
         # Assuming genai.GenerativeModel is used for generating content
         model = genai.GenerativeModel(model_name="gemini-1.5-pro")
-        texti = image2text(image_path)
-        print(texti)
-        eng_text = uz_to_eng(texti)
-        print(eng_text)
+        # texti = image2text(image_path)
+        # print(texti)
+        # eng_text = uz_to_eng(texti)
+        # print(eng_text)
         # Generate content from the image
-        response = model.generate_content(["what can i write to her? give me such an answer to pleasantly surprise her and so that she will have an even better opinion of me. \n The interpretation of the words in the picture" + eng_text, img])
-        print(response.text)
+        response = model.generate_content(["what can i write to her? give me such an answer to pleasantly surprise her and so that she will have an even better opinion of me. \nwrite in Uzbek. write 1 short and beautiful sentence", img])
+        print(response)
         # Return or print the response
-        return eng_to_uz(response.text)
+        return response.text
 
     except Exception as e:
         print(f"Error processing image: {e}")
@@ -52,7 +52,6 @@ async def send_welcome(message: types.Message):
 
 @dp.message_handler(content_types=['photo'])
 async def handle_photo(message: types.Message):
-    await message.reply("Processing image...")
 
     file_info = await bot.get_file(message.photo[-1].file_id)
     downloaded_file = await bot.download_file(file_info.file_path)
